@@ -25,7 +25,8 @@ namespace Microsoft.Samples.Kinect.ColorBasics
         /// </summary>
         private KinectSensor sensor;
 
-        internal KinectStream mStream;
+        internal KinectStream mStream = null;
+        internal KinectStream mStream2 = null;
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
@@ -99,6 +100,11 @@ namespace Microsoft.Samples.Kinect.ColorBasics
                 this.mStream.Close();
             }
 
+            if (this.mStream2 != null)
+            {
+                this.mStream2.Close();
+            }
+
             this.mStream = new ColorStream();
 
 
@@ -118,6 +124,11 @@ namespace Microsoft.Samples.Kinect.ColorBasics
             if (this.mStream != null)
             {
                 this.mStream.Close();
+            }
+
+            if (this.mStream2 != null)
+            {
+                this.mStream2.Close();
             }
 
             this.mStream = new DepthStream();
@@ -141,6 +152,11 @@ namespace Microsoft.Samples.Kinect.ColorBasics
                 this.mStream.Close();
             }
 
+            if (this.mStream2 != null)
+            {
+                this.mStream2.Close();
+            }
+
             this.mStream = new InfraStream();
 
 
@@ -152,7 +168,54 @@ namespace Microsoft.Samples.Kinect.ColorBasics
 
         private void ButtonSkeletonClick(object sender, RoutedEventArgs e)
         {
+            if (null == this.sensor)
+            {
+                this.statusBarText.Text = Properties.Resources.ConnectDeviceFirst;
+                return;
+            }
+            if (this.mStream != null)
+            {
+                this.mStream.Close();
+            }
 
+            if (this.mStream2 != null)
+            {
+                this.mStream2.Close();
+            }
+
+            this.mStream = new SkeletonStream();
+
+
+            this.mStream.Init(this.sensor, this.Image);
+
+            this.statusBarText.Text = "Vue squelette";
+        }
+
+        private void ButtonSkeletonColorClick(object sender, RoutedEventArgs e)
+        {
+            if (null == this.sensor)
+            {
+                this.statusBarText.Text = Properties.Resources.ConnectDeviceFirst;
+                return;
+            }
+            if (this.mStream != null)
+            {
+                this.mStream.Close();
+            }
+
+            if (this.mStream2 != null)
+            {
+                this.mStream2.Close();
+            }
+
+            this.mStream = new SkeletonStream();
+            this.mStream2 = new ColorStream();
+
+
+            this.mStream.Init(this.sensor, this.Image);
+            this.mStream2.Init(this.sensor, this.Image);
+
+            this.statusBarText.Text = "Vue squelette + couleur";
         }
 
         private void NearModeCheckBoxChange(object sender, RoutedEventArgs e)

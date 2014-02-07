@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Kinect;
+using System.Windows.Controls;
 
 namespace Microsoft.Samples.Kinect.ColorBasics
 {
@@ -16,12 +17,16 @@ namespace Microsoft.Samples.Kinect.ColorBasics
 
         protected byte[] colorPixels;
 
+        protected Canvas canvas;
+
         public virtual void Init(KinectSensor sensor, System.Windows.Controls.Canvas canvas)
         {
             this.sensor = sensor;
             this.image = new System.Windows.Controls.Image();
 
-            canvas.Children.Add(image);
+            this.canvas = canvas;
+
+            canvas.Children.Insert(0, image);
         }
 
         public abstract void Close();

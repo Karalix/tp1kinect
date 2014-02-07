@@ -62,6 +62,7 @@
             <Button Click="ButtonDepthClick" Content="Profondeur"/>
             <Button Click="ButtonInfraClick" Content="Infrarouge"/>
             <Button Click="ButtonSkeletonClick" Content="Squelette"/>
+            <Button Click="ButtonSkeletonColorClick" Content="Squelette + couleur"/>
         </StackPanel>
     </Grid>
 </Window>
